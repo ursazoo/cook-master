@@ -1,25 +1,35 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, useRoutes } from "react-router-dom";
-import { Provider } from "react-redux";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import { ConfigProvider } from "antd";
+import { ConfigProvider } from 'antd';
 
-import routes from "./router";
-import store from "./store";
+import store from './store';
 
-import "./index.less";
+import HomePage from './pages/home';
+import DashBoardPage from '@/pages/admin';
 
-const RouteElement = () => useRoutes(routes);
+import LoginPage from '@/pages/admin/login';
+import MenuPage from '@/pages/admin/menu';
+import PostPage from '@/pages/admin/post';
+import NotFoundPage from './pages/NotFoundPage';
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+import './index.less';
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        {/* <ConfigProvider csp={{ nonce: "YourNonceCode" }}> */}
-        <RouteElement />
-        {/* </ConfigProvider> */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/admin" element={<DashBoardPage />} />
+          <Route path="/admin/login" element={<LoginPage />} />
+          <Route path="/admin/menu" element={<MenuPage />} />
+          <Route path="/admin/post/:id?" element={<PostPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

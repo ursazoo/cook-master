@@ -10,6 +10,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@ant-design/pro-components": "^2.3.57",
     "@reduxjs/toolkit": "^1.9.3",
     "antd": "^5.2.2",
     "emoji-picker-react": "^4.4.7",

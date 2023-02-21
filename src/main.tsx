@@ -7,7 +7,7 @@ import { ConfigProvider } from 'antd';
 
 import store from './store';
 
-import HomePage from './pages/home';
+import HomePage from './pages/client';
 import DashBoardPage from '@/pages/admin';
 
 import LoginPage from '@/pages/admin/login';

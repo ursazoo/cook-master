@@ -43,8 +43,6 @@ function onClick() {
 }
 
 .vegetable {
-  // border: 1px solid rgba(187, 247, 208, 0.2);
-  // background-color: rgba(134, 239, 172, 0.2);
   border: 1px solid rgba(22, 101, 52, 1);
   background-color: #ffffff;
   color: rgba(22, 101, 52, 1);

@@ -12,11 +12,8 @@
   position: relative;
   width: 100vw;
   height: 100vh;
-  // padding-top: 50px;
-
   background: url('@/assets/images/background.webp') repeat;
   background-size: 15%;
-
   filter: blur(1px);
 }
 </style>

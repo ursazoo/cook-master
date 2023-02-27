@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  addIngredient,
-  removeIngredient,
-  TIngredient,
-  Type2NameMap,
-} from "@/store/modules/dish";
-import styles from "./index.module.less";
-import { IIngredient } from "../Filters";
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggle, TIngredient, Type2NameMap } from '@/store/modules/ingredient';
+import styles from './index.module.less';
+import { IIngredient } from '../Filters';
 
 interface IProps {
   // 筛选的食材种类
@@ -20,24 +15,22 @@ const SingleFilterComponent = ({ type, source }: IProps) => {
   const dispatch = useDispatch();
   const dish = useSelector((store: any) => store.dish);
 
-  const data = dish[type];
+  // const data = dish[type];
 
   // 检测到变化后调用接口查询支持的菜谱
-  useEffect(() => {
-    console.log(data)
-  }, [data])
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
 
   function handleSelect(ingredient: IIngredient) {
-    const isExisted = data.some(
-      (item: IIngredient) => item.id === ingredient.id
-    );
-    console.log(isExisted);
+    // const isExisted = data.some((item: IIngredient) => item.id === ingredient.id);
+    // console.log(isExisted);
 
-    if (isExisted) {
-      dispatch(removeIngredient({ type, id: ingredient.id }));
-      return;
-    }
-    dispatch(addIngredient({ type, ingredient }));
+    // if (isExisted) {
+    //   dispatch(remove({ type, id: ingredient.id }));
+    //   return;
+    // }
+    dispatch(toggle({ type, ingredient }));
   }
 
   return (

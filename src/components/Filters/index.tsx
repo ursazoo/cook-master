@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Tabs } from 'antd';
 
-import { resetIngredient } from '@/store/modules/dish';
+import { toggle, IIngredientState, reset } from '@/store/modules/ingredient';
 import SingleFilterComponent from '../SingleFilter';
 import IngredientTagComponent from '../IngredientTag';
 
 import styles from './index.module.less';
+import { TIngredient } from '../../store/modules/ingredient';
 
 export interface IIngredient {
   id: string;
@@ -16,25 +17,33 @@ export interface IIngredient {
 
 const FiltersComponent = () => {
   const dispatch = useDispatch();
+  const {
+    vegetable: selectedVegetable,
+    meat: selectedMeat,
+    aquatic: selectedAquatic,
+    stapleFood: selectedStapleFood,
+    utensil: selectedUtensil,
+  } = useSelector((state: any) => state.ingredient);
+
   const [meatSource, setMeatSource] = useState<IIngredient[]>([]);
 
   const [ingredients, setIngredients] = useState({
     vegetable: {
       leafy: [
         {
-          id: '1',
+          id: 'vegetable_leafy_1',
           emoji: '🥬',
           name: '娃娃菜',
         },
         {
-          id: '2',
+          id: 'vegetable_leafy_2',
           emoji: '🥦',
           name: '西蓝花',
         },
       ],
       rhizome: [
         {
-          id: '1',
+          id: 'vegetable_rhizome_1',
           emoji: '🥔',
           name: '土豆',
         },
@@ -70,7 +79,12 @@ const FiltersComponent = () => {
     ]);
   }, []);
 
-  const [vegetableTypes, setVegetableTypes] = useState([
+  useEffect(() => {
+    console.log(`new selectedVegetable`);
+    console.log(selectedVegetable);
+  }, [selectedVegetable]);
+
+  const [vegetableTabs, setVegetableTabs] = useState([
     {
       label: `叶菜/花菜`,
       key: '1',
@@ -80,8 +94,9 @@ const FiltersComponent = () => {
             <IngredientTagComponent
               key={`${item.id}_${index}`}
               type="vegetable"
-              isActive={false}
+              isActive={selectedVegetable.some((selected: IIngredient) => selected.id === item.id)}
               ingredient={item}
+              onClick={() => handleToggle('vegetable', item)}
             />
           ))}
         </div>
@@ -96,8 +111,9 @@ const FiltersComponent = () => {
             <IngredientTagComponent
               key={`${item.id}_${index}`}
               type="vegetable"
-              isActive={false}
+              isActive={selectedVegetable.some((selected: IIngredient) => selected.id === item.id)}
               ingredient={item}
+              onClick={() => handleToggle('vegetable', item)}
             />
           ))}
         </div>
@@ -114,6 +130,7 @@ const FiltersComponent = () => {
               type="vegetable"
               isActive={false}
               ingredient={item}
+              onClick={() => handleToggle('vegetable', item)}
             />
           ))}
         </div>
@@ -130,6 +147,7 @@ const FiltersComponent = () => {
               type="vegetable"
               isActive={false}
               ingredient={item}
+              onClick={() => handleToggle('vegetable', item)}
             />
           ))}
         </div>
@@ -147,30 +165,40 @@ const FiltersComponent = () => {
     },
   ]);
 
-  // 可选蔬菜
-  const [vegetable, setVegetable] = useState([]);
-  // 可选肉类
-  const [meat, setMeat] = useState([]);
+  // 肉禽蛋品
+  const [meatTabs, setMeatTabs] = useState([]);
+
+  // 海鲜水产
+  const [aquaticTabs, setAquaticTabs] = useState([]);
+
   // 可选主食
   const [stapleFood, setStapleFood] = useState([]);
+
   // 可选厨具
   const [utensils, setUtensils] = useState([]);
+
+  function handleToggle(type: TIngredient, ingredient: IIngredient) {
+    dispatch(toggle({ type, ingredient }));
+  }
 
   return (
     <div>
       <div style={{ marginBottom: '20px' }}>我们准备做饭了！先来选一下食材吧 🥘</div>
 
       <h3 style={{ margin: '20px 0 0' }}>蔬菜调料</h3>
-      <Tabs defaultActiveKey="1" centered items={vegetableTypes} />
+      <Tabs defaultActiveKey="1" centered items={vegetableTabs} />
 
       <h3 style={{ margin: '20px 0 0' }}>肉禽蛋品</h3>
-      <Tabs defaultActiveKey="1" centered items={vegetableTypes} />
+      <Tabs defaultActiveKey="1" centered items={meatTabs} />
+
+      <h3 style={{ margin: '20px 0 0' }}>海鲜水产</h3>
+      <Tabs defaultActiveKey="1" centered items={aquaticTabs} />
 
       <h3 style={{ margin: '20px 0 0' }}>米饭面食</h3>
-      <Tabs defaultActiveKey="1" centered items={vegetableTypes} />
+      <SingleFilterComponent type="utensil" source={stapleFood} />
 
       <h3 style={{ margin: '20px 0 0' }}>厨具</h3>
-      <Tabs defaultActiveKey="1" centered items={vegetableTypes} />
+      <SingleFilterComponent type="utensil" source={utensils} />
 
       {/* <div>肉类</div>
       <SingleFilterComponent type="meat" source={meatSource} />

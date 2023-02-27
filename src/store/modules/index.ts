@@ -1,1 +1,1 @@
-export { default as dish } from './dish'
+export { default as ingredient } from './ingredient';

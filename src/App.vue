@@ -1,11 +1,15 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="container">
-    <div class="background" />
-    <RouterView />
-  </div>
+  <n-config-provider inline-theme-disabled>
+    <div class="container">
+      <div class="background" />
+      <RouterView />
+    </div>
+  </n-config-provider>
 </template>
+
+<script setup lang="ts">
+import { NConfigProvider } from 'naive-ui';
+</script>
 
 <style lang="scss" scoped>
 .background {

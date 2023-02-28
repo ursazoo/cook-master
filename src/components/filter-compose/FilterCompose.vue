@@ -1,7 +1,8 @@
 <template>
   <div class="filterComposeContainer">
-    <div style="margin-bottom: 20px">我们准备做饭了！先来选一下食材吧 🥘</div>
-    <div>
+    <div class="title">我们准备做饭了！先来选一下食材吧 🥘</div>
+    <div class="filter-container">
+      <div class="filter-title">蔬菜调料</div>
       <n-tabs type="line" animated class="tagsContainer">
         <n-tab-pane
           v-for="label in vegetableTypes"
@@ -20,7 +21,8 @@
         </n-tab-pane>
       </n-tabs>
     </div>
-    <div>
+    <div class="filter-container">
+      <div class="filter-title">肉禽蛋品</div>
       <n-tabs type="line" animated class="tagsContainer">
         <n-tab-pane
           v-for="label in meatTypes"
@@ -175,6 +177,19 @@ function onSelect(type: TIngredient, ingredient: any) {
 </script>
 
 <style lang="scss" scoped>
+.title {
+  margin-bottom: 20px;
+}
+
+.filter-title {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.filter-container {
+  margin-bottom: 20px;
+}
 .n-tab-pane {
   display: flex;
   flex-wrap: wrap;

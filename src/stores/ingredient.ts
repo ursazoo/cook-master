@@ -9,6 +9,14 @@ export interface IIngredient {
   emoji: string;
 }
 
+export enum EIngredient {
+  'vegetable' = '蔬菜调料',
+  'meat' = '肉禽蛋品',
+  'aquatic' = '海鲜水产',
+  'stapleFood' = '主食面点',
+  'utensil' = '厨具',
+}
+
 // export type IIngredient = {
 //   id: string;
 //   name: string;
@@ -41,6 +49,10 @@ export const useIngredientStore = defineStore('ingredient', () => {
 
   const ingredients = ref(initialState);
 
+  const expandedName = ref<TIngredient>();
+
+  const ingredientTypes: TIngredient[] = ['vegetable', 'meat', 'aquatic', 'stapleFood', 'utensil'];
+
   function reset() {
     ingredients.value.vegetable = [];
     ingredients.value.meat = [];
@@ -53,14 +65,35 @@ export const useIngredientStore = defineStore('ingredient', () => {
     console.log('will add');
     // if (ingredients.value[type].every((item: IIngredient) => item.id !== ingredient.id)) {}
     ingredients.value[type] = [...ingredients.value[type], ingredient];
+    expandedName.value = type;
     console.log(ingredients.value[type]);
   }
 
   function remove(type: TIngredient, ingredient: IIngredient) {
     console.log('will remove');
     ingredients.value[type] = ingredients.value[type].filter((item) => item.id !== ingredient.id);
+    if (ingredients.value[type].length) {
+      expandedName.value = type;
+    } else {
+      for (let key in ingredients.value) {
+        console.log(`key: ${key}`);
+        if (ingredients.value[key].length) {
+          debugger;
+          expandedName.value = key as TIngredient;
+          break;
+        } else {
+          expandedName.value = undefined;
+          break;
+        }
+      }
+    }
+
     console.log(ingredients.value[type]);
   }
 
-  return { ingredients, add, remove, reset };
+  function setExpandedName(type: TIngredient) {
+    expandedName.value = type;
+  }
+
+  return { ingredients, ingredientTypes, expandedName, add, remove, reset, setExpandedName };
 });

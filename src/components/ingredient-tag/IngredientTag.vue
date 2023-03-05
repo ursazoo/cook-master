@@ -35,7 +35,8 @@ function onClick() {
   padding: 2px 8px;
   border-radius: 5px;
   font-size: 14px;
-  cursor: pointer;
+  // cursor: pointer;
+  cursor: url('@/assets/images/spatula.png'), auto;
   transition: 0.2s linear all;
   &:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);

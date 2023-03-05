@@ -9,7 +9,6 @@
 <script setup lang="ts">
 import SummaryCard from '@/components/summary-card/SummaryCard.vue';
 import FilterCompose from '@/components/filter-compose/FilterCompose.vue';
-function handleReset() {}
 </script>
 
 <style lang="scss" scoped>
@@ -25,7 +24,7 @@ function handleReset() {}
   width: 1200px;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px 5px rgb(0 0 0 / 10%);
+  box-shadow: 0 0 10px 5px rgb(0 0 0 / 10%);
   padding: 20px 40px;
   box-sizing: border-box;
 }

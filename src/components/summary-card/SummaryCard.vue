@@ -1,14 +1,14 @@
 <template>
   <div class="summaryCardContainer">
     <NCard title="食材清单" class="cardContainer">
-      <n-collapse
-        arrow-placement="right"
+      <NCollapse
         accordion
+        arrow-placement="right"
         :expanded-names="expandedName"
         @item-header-click="onExpandClick($event)"
       >
         <template v-for="type in store.ingredientTypes">
-          <n-collapse-item
+          <NCollapseItem
             v-if="store.ingredients[type]?.length"
             :title="`${EIngredient[type]} x ${store.ingredients?.[type]?.length}`"
             :name="type"
@@ -26,7 +26,7 @@
                 @click="store.remove(type, item)"
               />
             </div>
-          </n-collapse-item>
+          </NCollapseItem>
         </template>
         <!-- <n-collapse-item
           v-if="store.ingredients?.vegetable?.length"
@@ -87,7 +87,7 @@
             <SVGClose class="closeIcon" />
           </div>
         </n-collapse-item> -->
-      </n-collapse>
+      </NCollapse>
 
       <!-- <div v-if="store.ingredients?.vegetable?.length">
         <div>{{ EIngredient.vegetable }}</div>
@@ -127,8 +127,8 @@
       </div> -->
     </NCard>
     <div class="operationContainer">
-      <NButton type="primary" @click="handleSearch()">看看能做什么菜</NButton>
-      <NButton type="warning" @click="handleReset()">重置一下</NButton>
+      <NButton class="button" type="primary" @click="handleSearch()">看看能做什么菜</NButton>
+      <NButton class="button" type="warning" @click="handleReset()">重置一下</NButton>
     </div>
   </div>
 </template>
@@ -177,6 +177,7 @@ function onExpandClick(event: any) {
 
 <style lang="scss" scoped>
 .summaryCardContainer {
+  cursor: url('@/assets/images/spatula.png'), auto;
   .cardContainer {
     width: 300px;
 
@@ -187,7 +188,6 @@ function onExpandClick(event: any) {
       justify-content: space-between;
       margin: 5px 0;
       padding: 5px 10px 5px 0;
-      cursor: default;
       transition: 0.2s linear all;
       &:hover {
         box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
@@ -198,7 +198,7 @@ function onExpandClick(event: any) {
       .closeIcon {
         width: 10px;
         height: 10px;
-        cursor: pointer;
+        // cursor: pointer;
       }
     }
   }
@@ -207,6 +207,9 @@ function onExpandClick(event: any) {
     justify-content: space-around;
     align-items: center;
     margin-top: 20px;
+    .button {
+      cursor: url('@/assets/images/spatula.png'), auto;
+    }
   }
 }
 </style>

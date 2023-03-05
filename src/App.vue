@@ -1,10 +1,10 @@
 <template>
-  <n-config-provider inline-theme-disabled>
+  <NConfigProvider inline-theme-disabled>
     <div class="container">
       <div class="background" />
       <RouterView />
     </div>
-  </n-config-provider>
+  </NConfigProvider>
 </template>
 
 <script setup lang="ts">

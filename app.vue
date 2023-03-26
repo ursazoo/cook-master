@@ -1,8 +1,17 @@
 <template>
   <div>
-    <NuxtPage />
+    <NMessageProvider>
+      <NuxtPage />
+      <SigninModal />
+    </NMessageProvider>
   </div>
 </template>
+
+<script setup lang="ts">
+import { NMessageProvider } from 'naive-ui';
+import SigninModal from '@/components/signin-modal/index.vue';
+</script>
+
 
 <style lang="scss">
 @import './styles/font.scss';

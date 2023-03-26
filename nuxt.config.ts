@@ -1,4 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { NuxtConfig } from '@nuxt/types'
+
+// const config: NuxtConfig = {
+//   // Your Nuxt config
+//   buildModules: [
+//     '@nuxt/typescript-build',
+//   ],
+//   plugins: [
+//     { src: '~/plugins/pinia.ts', mode: 'client' },
+//   ],
+// }
+// export default defineNuxtConfig(config)
 
 export default defineNuxtConfig({
   title: "Hello Nuxt",
@@ -9,6 +21,9 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: "page", mode: "out-in" },
   },
+  plugins: [
+    '~/plugins/pinia'
+  ],
   build: {
     transpile:
       process.env.NODE_ENV === "production"

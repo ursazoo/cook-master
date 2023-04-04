@@ -19,7 +19,7 @@ interface Response {
 // const pinia = createPinia()
 console.log(`pinia`, pinia)
 
-// const mainStore = pinia.useStore(useMainStore)
+// const mainStore = pinia.use(useMainStore())
 
 // store = pinia.useStore(counterStore)
 

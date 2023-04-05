@@ -20,7 +20,6 @@ import { TabsProps } from 'naive-ui'
 
 type TabsThemeOverrides = NonNullable<TabsProps['themeOverrides']>
 
-
 const props = defineProps<{
   primaryMaterial: any;
   secondaryMaterialList: any[]

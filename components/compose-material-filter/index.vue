@@ -30,6 +30,7 @@ const props = defineProps<{
 
 <style scoped lang="scss">
 .compose-material-filter-container {
+  width: 100%;
   margin-bottom: 20px;
 
   .primary-material-filter-container {

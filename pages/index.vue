@@ -1,29 +1,43 @@
 <template>
-    <div class="title">我们准备做饭了！先来选一下食材吧 🥘</div>
+    <div class="header">
+        <div class="title">我们准备做饭了！先来选一下食材吧 🥘</div>
+        <div class="operations">
+            <NButton @click="mainStore.setIsShowSummaryCard(true)">查看清单</NButton>
+        </div>
+    </div>
     <div class="home-page-container">
         <ComposeMaterialFilter :primary-material-list="primaryMaterialList" :cookware-list="cookwareList" />
-        <SummaryCard />
     </div>
+    <SummaryCard />
 </template>
 
 <script setup lang="ts">
 import ComposeMaterialFilter from '@/components/compose-material-filter/index.vue';
 import SummaryCard from '@/components/summary-card/index.vue';
+import { NButton } from 'naive-ui';
+import { useMainStore } from '../stores/main/index';
 
-const { data: primaryMaterialResult } = await useFetch('http://localhost:3000/api/primary-material/structured-list')
+const mainStore = useMainStore();
 
-const { data: cookwareResult } = await useFetch('http://localhost:3000/api/cookware/structured-list')
+const { data: primaryMaterialResult } = await useFetch('http://localhost:9000/api/primary-material/structured-list')
+const { data: cookwareResult } = await useFetch('http://localhost:9000/api/cookware/structured-list')
 
 const primaryMaterialList = ref((primaryMaterialResult?.value as any)?.data?.list || []);
-
 const cookwareList = ref((cookwareResult?.value as any)?.data?.list || []);
 
 </script>
 
 <style scoped lang="scss">
-.title {
+.header {
     width: 90vw;
     margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+        font-size: 14px;
+    }
 }
 
 .home-page-container {

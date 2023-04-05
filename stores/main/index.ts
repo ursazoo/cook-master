@@ -13,6 +13,7 @@ export const useMainStore = defineStore("main", () => {
 
   const signinModal = ref(false);
   const userInfo = ref(null);
+  const isShowSummaryCard = ref(false);
 
   function setSigninModal(value: boolean) {
     console.log(`setSigninModal: ${value}`)
@@ -30,6 +31,10 @@ export const useMainStore = defineStore("main", () => {
   function reset() {
     signinModal.value = false
     userInfo.value = null;
+  }
+
+  function setIsShowSummaryCard(value: boolean) {
+    isShowSummaryCard.value = value;
   }
 
   /**
@@ -51,9 +56,11 @@ export const useMainStore = defineStore("main", () => {
   return {
     signinModal,
     userInfo,
+    isShowSummaryCard,
     setSigninModal,
     setUserInfo,
     clearUserInfo,
-    reset
+    reset,
+    setIsShowSummaryCard
   };
 });

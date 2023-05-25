@@ -3,17 +3,11 @@ import { defineStore } from "pinia";
 
 
 export const useMainStore = defineStore("main", () => {
-  // const initialState = ref<{
-  //   signinModal: boolean;
-  //   userInfo: any;
-  // }>({
-  //   signinModal: false,
-  //   userInfo: null
-  // });
-
   const signinModal = ref(false);
   const userInfo = ref(null);
+  const posts = ref<any>([]);
   const isShowSummaryCard = ref(false);
+  const isShowPostsCard = ref(false);
 
   function setSigninModal(value: boolean) {
     console.log(`setSigninModal: ${value}`)
@@ -37,30 +31,26 @@ export const useMainStore = defineStore("main", () => {
     isShowSummaryCard.value = value;
   }
 
-  /**
-   * [
-   *    {
-   *        secondaryMaterialId: '',
-   *        secondaryMaterialName: '',
-   *        list: []
-   *    },
-   *    {
-   *        secondaryMaterialId: '',
-   *        secondaryMaterialName: '',
-   *        list: []
-   *    }
-   * ]
-   */
+  function setIsShowPostsCard(value: boolean) {
+    isShowPostsCard.value = value;
+  }
 
+  function setPosts(value: any[]) {
+    posts.value = value;
+  }
 
   return {
     signinModal,
     userInfo,
+    posts,
     isShowSummaryCard,
+    isShowPostsCard,
     setSigninModal,
     setUserInfo,
     clearUserInfo,
     reset,
-    setIsShowSummaryCard
+    setIsShowSummaryCard,
+    setIsShowPostsCard,
+    setPosts
   };
 });

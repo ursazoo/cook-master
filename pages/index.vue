@@ -9,11 +9,13 @@
         <ComposeMaterialFilter :primary-material-list="primaryMaterialList" :cookware-list="cookwareList" />
     </div>
     <SummaryCard />
+    <PostsCard />
 </template>
 
 <script setup lang="ts">
 import ComposeMaterialFilter from '@/components/compose-material-filter/index.vue';
 import SummaryCard from '@/components/summary-card/index.vue';
+import PostsCard from '@/components/posts-card/index.vue';
 import { NButton } from 'naive-ui';
 import { useMainStore } from '../stores/main/index';
 

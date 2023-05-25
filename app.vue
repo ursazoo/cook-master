@@ -15,6 +15,7 @@ import SigninModal from '@/components/signin-modal/index.vue';
 
 <style lang="scss">
 @import './styles/font.scss';
+@import './styles/variable.scss';
 
 .page-enter-active,
 .page-leave-active {
@@ -33,16 +34,26 @@ import SigninModal from '@/components/signin-modal/index.vue';
 
 html,
 body {
-  cursor: url('@/assets/images/spatula.png'), auto;
+  @include pc() {
+    cursor: url('@/assets/images/spatula.png'), auto;
 
-  &:hover {
-    cursor: url('@/assets/images/spatula.png'), pointer !important;
+    &:hover {
+      cursor: url('@/assets/images/spatula.png'), pointer !important;
+    }
   }
 }
 
 .n-tabs .n-tabs-tab {
-  &:hover {
+  @include pc() {
+    &:hover {
     cursor: url('@/assets/images/spatula.png'), pointer !important;
   }
+  }
 }
+
+// .n-drawer-body-content-wrapper {
+//   @include mobile() {
+//     padding: 16px 8px !important;
+//   }
+// }
 </style>

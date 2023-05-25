@@ -41,13 +41,11 @@
         </div>
       </NDrawerContent>
     </NDrawer>
-
-
   </div>
 </template>
 
 <script setup lang="ts">
-import { NButton, NCard, NEmpty, NIcon, NDrawer, NDrawerContent } from 'naive-ui';
+import { NButton, NEmpty, NIcon, NDrawer, NDrawerContent } from 'naive-ui';
 import { Airplane } from '@vicons/ionicons5'
 
 import { useMainStore } from '@/stores/main';
@@ -56,17 +54,23 @@ import {
   useBaseMaterialStore,
 } from '@/stores/baseMaterial';
 // import SVGClose from '@/components/icons/SVGClose.vue';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useRequest } from 'vue-request';
 import { getPostList } from '@/common/apis/post';
-import Cookies from 'js-cookie';
 
 const store = useBaseMaterialStore();
 const mainStore = useMainStore();
 const hoverId = ref('');
 
-const { run, data, loading, error } = useRequest(getPostList, {
+const { run: searchPost } = useRequest(getPostList, {
   manual: true,
+  onSuccess(response: any) {
+    console.log(response)
+    mainStore.posts = response?.data?.list || []
+  },
+  onError(error: any) {
+    console.log(error)
+  }
 });
 
 function handleReset() {
@@ -75,25 +79,18 @@ function handleReset() {
 }
 
 function handleSearch() {
-  console.log(Cookies.get('Authorization'))
+  mainStore.setIsShowPostsCard(true);
 
-  // console.log(!mainStore.userInfo)
-  if (!Cookies.get('Authorization')) {
-    mainStore.setSigninModal(true)
-  } else {
-    console.log(store.selected.map(item => item.list).flat())
-    run({
-      pageNum: 1,
-      pageSize: 100,
-      // TODO: 填充真实需要查询的数据
-      baseMaterialIds: [],
-      cookwareIds: []
-    })
-
-    console.log(data);
-  }
-
-  // console.log(store.baseMaterials);
+  const baseMaterialIds = store.selected.map(item => item.list).flat().filter((item: any) => item?.secondaryMaterial.id !== "cookware")?.map(item => item.id);
+  const cookwareIds = store.selected.map(item => item.list).flat().filter((item: any) => item?.secondaryMaterial.id === "cookware")?.map(item => item.id);
+  
+  searchPost({
+    pageNum: 1,
+    pageSize: 100,
+    baseMaterialIds,
+    cookwareIds,
+    withDetail: true
+  })
 }
 
 function onMouseEnter(id: string) {

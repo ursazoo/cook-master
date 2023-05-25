@@ -28,6 +28,7 @@ export const createPost = (data: any): Promise<APIResponse<null>> => {
 export const getPostList = (data: {
   pageNum: number;
   pageSize: number;
+  withDetail: boolean;
   baseMaterialIds: string[];
   cookwareIds: string[]
 }): Promise<APIResponse<{ list: IPostItem[] }>> => {
